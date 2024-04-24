@@ -1,0 +1,62 @@
+#include <iostream>
+#include <cmath>
+
+using std::cout;
+using std::endl;
+
+int main()
+{
+        //solving for u (temperature)
+        double u[100][20][20];
+
+        //initialization paramters
+        int plate_length = 20;
+        int max_time = 3;
+
+        double alpha = 2.0;
+        double delta_x = 1.0;
+
+        double delta_t = (delta_x*delta_x)/(4.0*alpha);
+        double gamma = (alpha*delta_t)/(delta_x*delta_x);
+
+        //intial values
+        double u_initial = 0.0;
+        double u_top = 100.0;
+        double u_left = 0.0;
+        double u_bottom = 0.0;
+        double u_right = 0.0;
+
+        //initial values of u
+        for (int k=0; k<max_time; k++)
+        {
+                cout << "Time:" << k << endl;
+
+                for (int i=0; i<plate_length; i+=delta_x)
+                {
+                        for (int j=0; j<plate_length; j+=delta_x)
+                        {
+                                 u[k][i][j] = u_initial;
+
+                                if (i == 0 && j != plate_length - 1)
+                                u[k][i][j] = u_top;
+
+                                if (j == 0 && i != plate_length - 1)
+                                u[k][i][j] = u_left;
+
+                                if (i != plate_length - 1 && j == plate_length - 1)
+                                u[k][i][j] = u_right;
+
+                                if (j != plate_length - 1 && i == plate_length - 1)
+                                u[k][i][j] = u_bottom;
+
+                        /*      else
+                                        u[k][i][j] = gamma*(u[k-1][i+1][j] + u[k-1][i-1][j] + u[k-1][i][j+1] + u[k-1][i][j-1] - 4*u[k-1][i][j]) + u[k-1][i][j];
+                        */
+                                cout << "  " << u[k][i][j];
+                        }
+                        cout << endl;
+                }
+        }
+
+        return 0;
+}
