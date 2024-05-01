@@ -49,9 +49,9 @@ int main()
                                 if (j != plate_length - 1 && i == plate_length - 1)
                                 u[k][i][j] = u_bottom;
 
-                        /*      else
+                                else
                                         u[k][i][j] = gamma*(u[k-1][i+1][j] + u[k-1][i-1][j] + u[k-1][i][j+1] + u[k-1][i][j-1] - 4*u[k-1][i][j]) + u[k-1][i][j];
-                        */
+                        
                                 cout << "  " << u[k][i][j];
                         }
                         cout << endl;
